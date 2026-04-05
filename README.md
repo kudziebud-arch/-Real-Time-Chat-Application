@@ -300,7 +300,7 @@ If you found this project useful or impressive:
 ## 📬 Contact
 
 * GitHub Issues (preferred)
-* Email: [gorogodotakundah26@gmail.com](mailto:gorogodotakundah26@gmail.com)
+* Email: [kudzie@gmail.com]
 
 ---
 
