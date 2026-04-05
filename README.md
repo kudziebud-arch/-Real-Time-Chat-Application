@@ -276,7 +276,7 @@ crypto.createHash("sha256");
 
 ## 👨‍💻 Author
 
-**Takunda Leonard Gorogodo**
+**Budwell K Nyamhamba**
 
 Full-Stack Developer | Computer Science Student
 
