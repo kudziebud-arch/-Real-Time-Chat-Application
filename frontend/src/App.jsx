@@ -1,23 +1,25 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from "./context/AuthContext";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthContext, AuthProvider } from "./context/AuthContext";
 import { SocketProvider } from "./context/SocketContext";
+import { GroupProvider } from "./context/GroupContext";
 import Login from "./pages/Login";
 import Chat from "./pages/Chat";
+import Profile from "./pages/Profile";
 
 function AppRoutes() {
   const { user } = useContext(AuthContext);
 
   return (
     <Routes>
-      <Route 
-        path="/" 
-        element={user ? <Navigate to="/chat" /> : <Login />} 
+      <Route
+        path="/"
+        element={user ? <Navigate to="/chat" /> : <Login />}
       />
-      <Route 
-        path="/chat" 
-        element={user ? <Chat /> : <Navigate to="/" />} 
+      <Route path="/profile" element={<Profile />} />
+      <Route
+        path="/chat"
+        element={user ? <Chat /> : <Navigate to="/" />}
       />
     </Routes>
   );
@@ -25,13 +27,15 @@ function AppRoutes() {
 
 function App() {
   return (
-    <AuthProvider>
-      <SocketProvider>
-        <BrowserRouter>
-          <AppRoutes />
-        </BrowserRouter>
-      </SocketProvider>
-    </AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <SocketProvider>
+          <GroupProvider>
+            <AppRoutes />
+          </GroupProvider>
+        </SocketProvider>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 

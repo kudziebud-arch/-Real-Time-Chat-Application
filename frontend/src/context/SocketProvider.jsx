@@ -11,7 +11,7 @@ export const SocketProvider = ({ children }) => {
   useEffect(() => {
     if (!token) return;
 
-    // Connect socket with the token
+    
     const newSocket = io("http://localhost:5000", {
       auth: { token },
       transports: ['websocket'],
@@ -27,7 +27,7 @@ export const SocketProvider = ({ children }) => {
     newSocket.on("connect_error", (err) => {
       console.log("Socket connection error:", err.message);
       
-      // If token is invalid, logout
+      
       if (err.message === "Invalid or expired token") {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
@@ -37,7 +37,6 @@ export const SocketProvider = ({ children }) => {
 
     setSocket(newSocket);
 
-    // Cleanup on unmount or token change
     return () => {
       newSocket.close();
     };

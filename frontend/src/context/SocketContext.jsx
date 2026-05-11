@@ -4,6 +4,9 @@ import { AuthContext } from "./AuthContext";
 
 export const SocketContext = createContext();
 
+// ✅ Export this so GroupContext (and anywhere else) can import it
+export const useSocket = () => useContext(SocketContext);
+
 export const SocketProvider = ({ children }) => {
   const { token } = useContext(AuthContext);
   const [socket, setSocket] = useState(null);
@@ -13,7 +16,14 @@ export const SocketProvider = ({ children }) => {
 
     const newSocket = io("http://localhost:5000", {
       auth: { token },
-      transports: ['websocket']
+      transports: ["websocket"],
+      reconnection: true,
+      reconnectionAttempts: 5,
+      reconnectionDelay: 1000,
+    });
+
+    newSocket.on("connect", () => {
+      console.log("Socket connected");
     });
 
     newSocket.on("connect_error", (err) => {
